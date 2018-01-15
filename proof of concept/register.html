@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Register</title>
+</head>
+
+<body>
+    <script>
+        var socket = new io();
+        socket.on('data', function(d) {
+            // console.log('data', d)
+            var dom = document.getElementById('dataSoket');
+            dom.innerHTML = "";
+            dom.innerHTML = d;
+        });
+
+        $(document).ready(function() {
+            $('#submit').click(function() {
+
+                var data = {
+                    dataNum: $("#idverzenden").val()
+                }
+
+                $.ajax({
+                        method: "POST",
+                        url: "/post",
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        dataType: 'json'
+
+                    }).done(function() {
+                        alert("second success");
+                    })
+                    .fail(function() {
+                        alert("error");
+                    })
+
+            })
+        })
+    </script>
+    <h2 id="dataSoket"></h2>
+    <input type="number" id="idverzenden">
+    <button id="submit">verzenden</button>
+
+
+</body>
+
+
+
+</html>

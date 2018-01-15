@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/socket.io/socket.io.js"></script>
+    <title>login</title>
+</head>
+
+<body>
+    <script>
+        var socket = new io();
+        socket.on('data', function(data) {
+            // console.log('data', data)
+            if (Number(data) >= 1 && Number(data) <= 127) {
+                document.location = "/home";
+            }
+            var dom = document.getElementById('logInmsg');
+            dom.innerHTML = "";
+            dom.innerHTML = data;
+
+        });
+    </script>
+    <div id="logInmsg">
+
+    </div>
+
+</body>
+
+</html>
